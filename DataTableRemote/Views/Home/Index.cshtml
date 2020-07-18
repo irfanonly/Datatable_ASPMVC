@@ -1,0 +1,77 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table id="example" class="display" style="width:100%">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </thead>
+  
+    <tfoot>
+        <tr>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Office</th>
+            <th>Age</th>
+            <th>Start date</th>
+            <th>Salary</th>
+        </tr>
+    </tfoot>
+</table>
+
+@section Scripts{
+    
+    <script>
+        $(document).ready( function () {
+            $('#example').DataTable({
+                "processing": true,
+                "serverSide": true,
+
+                "ajax": { url: "/home/records" , type: 'POST' },
+        "columns": [  
+            {
+                "data": "first_name",
+                "autoWidth": true,
+                "searchable": true
+            },
+             {
+                "data": "last_name",
+                "autoWidth": true,
+                "searchable": true
+            },
+              {
+                "data": "position",
+                "autoWidth": true,
+                "searchable": true
+            },
+               {
+                "data": "office",
+                "autoWidth": true,
+                "searchable": true
+            },
+                {
+                "data": "start_date",
+                "autoWidth": true,
+                "searchable": true
+            },
+                 {
+                "data": "salary",
+                "autoWidth": true,
+                "searchable": true
+            }
+        ]
+            });
+} );
+    </script>
+
+    }
