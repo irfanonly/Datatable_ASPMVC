@@ -23,6 +23,37 @@ namespace DataTableRemote.Models
         public int length { get; set; }
         public List<DataTableColumn> columns { get; set; }
         public DataTableSearch search { get; set; }
+
+        internal IQueryable<T> OrderOnOrderable(IQueryable<T> customers)
+        {
+            if (this.order != null)
+            {
+
+                foreach (var order in this.order)
+                {
+                    var item = this.columns.ElementAt(order.column);
+
+                    var propertyInfo = typeof(T).GetProperty(item.data);
+                    var orderByAddress = customers.OrderBy(x => propertyInfo.GetValue(x, null));
+
+                    if (order.dir == "asc")
+                    {
+                        customers = customers.OrderBy(x => propertyInfo.GetValue(x, null));
+                    }
+                    else if (order.dir == "desc")
+                    {
+                        customers = customers.OrderByDescending(x => propertyInfo.GetValue(x, null));
+                    }
+                }
+
+
+
+            }
+
+
+            return customers;
+        }
+
         public List<DataTableOrder> order { get; set; }
 
         public IQueryable<T> FilterOnAllSearchable(IQueryable<T> customers)

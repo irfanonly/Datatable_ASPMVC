@@ -62,12 +62,18 @@
                 {
                 "data": "start_date",
                 "autoWidth": true,
-                "searchable": true
+                    "searchable": true,
+                render: function ( data, type, row ) {
+        return new Date(parseInt(data.substr(6)));;
+    }
             },
                  {
                 "data": "salary",
                 "autoWidth": true,
-                "searchable": true
+                     "searchable": true,
+                render: function ( data, type, row ) {
+        return '$ '+ data;
+    }
             }
         ]
             });
